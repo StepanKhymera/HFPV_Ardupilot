@@ -138,7 +138,7 @@ void AC_AutoTune_Multi::do_gcs_announcements()
     if (now_ms - last_announce_ms < AUTOTUNE_ANNOUNCE_INTERVAL_MS) {
         return;
     }
-    GCS_SEND_TEXT(MAV_SEVERITY_INFO, "AutoTune: %s %s %u%%", get_axis_name(), get_tune_type_name(), (success_counter * (100/AUTOTUNE_SUCCESS_COUNT)));
+    GCS_SEND_TEXT(MAV_SEVERITY_INFO, "AT: %u%% %s %s", (success_counter * (100/AUTOTUNE_SUCCESS_COUNT)), get_axis_name(), get_tune_type_name());
     last_announce_ms = now_ms;
 }
 

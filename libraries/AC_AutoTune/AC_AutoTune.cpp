@@ -185,13 +185,13 @@ const char *AC_AutoTune::get_tune_type_name() const
 {
     switch (tune_type) {
     case TuneType::RATE_D_UP:
-        return "Rate D Up";
+        return "D Up";
     case TuneType::RATE_D_DOWN:
-        return "Rate D Down";
+        return "D Down";
     case TuneType::RATE_P_UP:
-        return "Rate P Up";
+        return "P Up";
     case TuneType::RATE_FF_UP:
-        return "Rate FF Up";
+        return "FF Up";
     case TuneType::ANGLE_P_UP:
         return "Angle P Up";
     case TuneType::ANGLE_P_DOWN:
