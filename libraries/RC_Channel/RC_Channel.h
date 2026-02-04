@@ -177,6 +177,7 @@ public:
 #if AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
 
         RELAY =               28, // Relay pin on/off (only supports first relay)
+        RELAY3_4 =            114, // Relay3 and Relay4 3pos switch
 #endif  // AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
         LANDING_GEAR =        29, // Landing gear controller
         LOST_VEHICLE_SOUND =  30, // Play lost vehicle sound

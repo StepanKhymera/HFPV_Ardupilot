@@ -215,6 +215,7 @@ const AP_Param::GroupInfo RC_Channel::var_info[] = {
     // @Values{Copter, Rover, Plane, Blimp, Sub}:  111:Loweheiser starter
     // @Values{Copter,Plane,Rover,Blimp,Sub,Tracker}: 112:SwitchExternalAHRS
     // @Values{Copter, Rover, Plane, Sub}: 113:Retract Mount2
+    // @Values{Copter, Rover, Plane, Sub}: 114:RELAY3_4 --/+-/++
     // @Values{Plane}: 150:CRUISE Mode
     // @Values{Copter}: 151:TURTLE Mode
     // @Values{Copter}: 152:SIMPLE heading reset
@@ -692,6 +693,7 @@ void RC_Channel::init_aux_function(const AUX_FUNC ch_option, const AuxSwitchPos 
     case AUX_FUNC::RELAY4:
     case AUX_FUNC::RELAY5:
     case AUX_FUNC::RELAY6:
+    case AUX_FUNC::RELAY3_4:
 #endif
 #if HAL_VISUALODOM_ENABLED
     case AUX_FUNC::VISODOM_ALIGN:
@@ -1562,6 +1564,10 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
         break;
     case AUX_FUNC::RELAY6:
         do_aux_function_relay(5, ch_flag == AuxSwitchPos::HIGH);
+        break;
+    case AUX_FUNC::RELAY3_4:
+        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
+        do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
         break;
 #endif  // AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
 
