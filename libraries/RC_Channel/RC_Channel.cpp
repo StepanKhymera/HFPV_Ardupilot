@@ -216,6 +216,7 @@ const AP_Param::GroupInfo RC_Channel::var_info[] = {
     // @Values{Copter,Plane,Rover,Blimp,Sub,Tracker}: 112:SwitchExternalAHRS
     // @Values{Copter, Rover, Plane, Sub}: 113:Retract Mount2
     // @Values{Copter, Rover, Plane, Sub}: 114:RELAY3_4 --/+-/++
+    // @Values{Copter, Rover, Plane, Sub}: 115: Double servo control with 2pos switch
     // @Values{Plane}: 150:CRUISE Mode
     // @Values{Copter}: 151:TURTLE Mode
     // @Values{Copter}: 152:SIMPLE heading reset
@@ -693,7 +694,7 @@ void RC_Channel::init_aux_function(const AUX_FUNC ch_option, const AuxSwitchPos 
     case AUX_FUNC::RELAY4:
     case AUX_FUNC::RELAY5:
     case AUX_FUNC::RELAY6:
-    case AUX_FUNC::RELAY3_4:
+    case AUX_FUNC::RELAY3_4: //Custom
 #endif
 #if HAL_VISUALODOM_ENABLED
     case AUX_FUNC::VISODOM_ALIGN:
@@ -763,6 +764,9 @@ void RC_Channel::init_aux_function(const AUX_FUNC ch_option, const AuxSwitchPos 
 #if HAL_GENERATOR_ENABLED
     case AUX_FUNC::LOWEHEISER_THROTTLE:
 #endif
+    //Customs
+    case AUX_FUNC::DOUBLE_SERVO_3POS:
+    
         break;
 
     // these functions require explicit initialization

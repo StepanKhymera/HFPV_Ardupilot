@@ -309,7 +309,7 @@ public:
 #if HAL_MOUNT_ENABLED
         RETRACT_MOUNT2 =     113, // Retract Mount2
 #endif  // HAL_MOUNT_ENABLED
-
+        DOUBLE_SERVO_3POS =  115, // double servo control with 2pos switch
         // if you add something here, make sure to update the documentation of the parameter in RC_Channel.cpp!
         // also, if you add an option >255, you will need to fix duplicate_options_exist
 

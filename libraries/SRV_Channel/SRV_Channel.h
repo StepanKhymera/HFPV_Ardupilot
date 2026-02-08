@@ -24,6 +24,7 @@
 #include <AP_FETtecOneWire/AP_FETtecOneWire.h>
 
 #include "SRV_Channel_config.h"
+#include "RC_Channel/RC_Channel.h"
 
 static_assert(NUM_SERVO_CHANNELS <= 32, "More than 32 servos not supported");
 
@@ -219,6 +220,7 @@ public:
         k_actuator4             = 187,
         k_actuator5             = 188,
         k_actuator6             = 189,
+        k_double_servo_control = 190,
         k_nr_aux_servo_functions         ///< This must be the last enum value (only add new values _before_ this one)
     } Function;
 
@@ -320,6 +322,9 @@ private:
     // reversal, following convention that 1 means reversed, 0 means normal
     AP_Int8 reversed;
     AP_Enum16<Function> function;
+
+    // additional memory for the last position of the aux switch for this channel, used to detect changes in position for triggering functions
+    RC_Channel::AuxSwitchPos last_switch_pos;
 
     // a pending output value as PWM
     uint16_t output_pwm;
