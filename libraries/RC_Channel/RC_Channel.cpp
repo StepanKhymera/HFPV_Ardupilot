@@ -1554,9 +1554,8 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
         do_aux_function_relay(1, ch_flag == AuxSwitchPos::HIGH);
         break;
     case AUX_FUNC::RELAY3:
-        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH);
-        break;
     case AUX_FUNC::RELAY4:
+        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
         do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
         break;
     case AUX_FUNC::RELAY5:
@@ -1569,6 +1568,7 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
         do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
         do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
         break;
+
 #endif  // AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
 
 #if AP_CAMERA_RUNCAM_ENABLED
