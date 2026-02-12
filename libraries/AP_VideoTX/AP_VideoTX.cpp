@@ -128,7 +128,7 @@ const AP_Param::GroupInfo AP_VideoTX::var_info[] = {
     // @Param: POW_LEVELS
     // @DisplayName: Power level count
     // @Description: How many proper power levels has been configured, < VTX_MAX_ADJUSTABLE_POWER_LEVELS = 6
-    // @Range: 0 VTX_MAX_ADJUSTABLE_POWER_LEVELS
+    // @Range: 0 6
     AP_GROUPINFO("POW_LEVELS", 15, AP_VideoTX, _num_active_levels, 6),
 
     // @Param: POW_CVAL1

@@ -675,7 +675,7 @@ protected:
         const uint16_t interval_ms = 10000;
     }  _timesync_request;
 
-    void handle_statustext(const mavlink_message_t &msg);
+    void handle_statustext(const mavlink_message_t &msg) const;
     struct {
         uint8_t last_src_system;
         uint8_t last_src_component;

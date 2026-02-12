@@ -217,7 +217,7 @@ const AP_Param::GroupInfo RC_Channel::var_info[] = {
     // @Values{Copter, Rover, Plane, Sub}: 113:Retract Mount2
     // @Values{Copter, Rover, Plane, Sub}: 114:RELAY3_4 --/+-/++
     // @Values{Plane}: 150:CRUISE Mode
-    // @Values{Copter}: 151:TURTLE Mode
+    // @Values{Copter}: 151:TURTLE Mode+++
     // @Values{Copter}: 152:SIMPLE heading reset
     // @Values{Copter, Rover, Plane, Sub}: 153:ArmDisarm (4.2 and higher)
     // @Values{Blimp}: 153:ArmDisarm

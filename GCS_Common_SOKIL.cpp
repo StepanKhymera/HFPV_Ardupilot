@@ -579,8 +579,8 @@ void GCS_MAVLINK::send_proximity()
     }
 
     // get min/max distances
-    const uint16_t dist_min = (uint16_t)(proximity->distance_min_m() * 100.0f); // minimum distance the sensor can measure in centimeters
-    const uint16_t dist_max = (uint16_t)(proximity->distance_max_m() * 100.0f); // maximum distance the sensor can measure in centimeters
+    const uint16_t dist_min = (uint16_t)(proximity->distance_min() * 100.0f); // minimum distance the sensor can measure in centimeters
+    const uint16_t dist_max = (uint16_t)(proximity->distance_max() * 100.0f); // maximum distance the sensor can measure in centimeters
 
     // send horizontal distances
     if (proximity->get_status() == AP_Proximity::Status::Good) {
@@ -1900,7 +1900,7 @@ void GCS_MAVLINK::packetReceived(const mavlink_status_t &status,
         // MAVLink2
         _channel_status.flags &= ~MAVLINK_STATUS_FLAG_OUT_MAVLINK1;
     }
-    if (!routing.check_and_forward(MAVLINK_FRAMING_OK, *this, msg)) {
+    if (!routing.check_and_forward(*this, msg)) {
         // the routing code has indicated we should not handle this packet locally
         return;
     }
