@@ -48,6 +48,35 @@ void SRV_Channel::output_ch(void)
         passthrough_from = int8_t((int16_t)function - k_rcin1_mapped);
         passthrough_mapped = true;
         break;
+    case k_double_servo_control:
+        RC_Channel::AuxSwitchPos last_servo_pos = previous_radio_in > 1700 ? RC_Channel::AuxSwitchPos::HIGH : (previous_radio_in < 1300 ? RC_Channel::AuxSwitchPos::LOW : RC_Channel::AuxSwitchPos::MIDDLE);
+
+        RC_Channel *switch_channel = rc().find_channel_for_option(RC_Channel::AUX_FUNC::DOUBLE_SERVO_3POS);
+        if (switch_channel != nullptr) {
+            //toggle servo position when RC goes from low to high.
+            RC_Channel::AuxSwitchPos new_switch_pos =  switch_channel->get_aux_switch_pos(); 
+            if (new_switch_pos != last_switch_pos) {
+                if (new_switch_pos == RC_Channel::AuxSwitchPos::HIGH) {
+                    switch (last_servo_pos)
+                    {
+                    case RC_Channel::AuxSwitchPos::LOW:
+                        output_pwm = 1500; 
+                        break;
+                    case RC_Channel::AuxSwitchPos::MIDDLE:
+                        output_pwm = 1900; 
+                        break;
+                    case RC_Channel::AuxSwitchPos::HIGH:
+                        output_pwm = 1000;
+                        break;
+                    }
+                }
+                last_switch_pos = new_switch_pos;
+            } else {
+                // maintain current position
+                output_pwm = previous_radio_in;
+            }
+        }
+        break;
     }
     if (passthrough_from != -1) {
         // we are doing passthrough from input to output for this channel
