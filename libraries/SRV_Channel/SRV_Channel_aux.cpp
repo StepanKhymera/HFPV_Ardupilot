@@ -63,9 +63,9 @@ void SRV_Channel::output_ch(void)
                         output_pwm = 1500; 
                         break;
                     case RC_Channel::AuxSwitchPos::MIDDLE:
-                        output_pwm = 1900; 
+                    output_pwm = 1900; 
                         break;
-                    case RC_Channel::AuxSwitchPos::HIGH:
+                        case RC_Channel::AuxSwitchPos::HIGH:
                         output_pwm = 1000;
                         break;
                     }
@@ -73,9 +73,10 @@ void SRV_Channel::output_ch(void)
                 last_switch_pos = new_switch_pos;
             } else {
                 // maintain current position
-                output_pwm = previous_radio_in;
+                output_pwm = previous_radio_in == 0 ? 1000 : previous_radio_in;
             }
         }
+        previous_radio_in = switch_channel->get_radio_in();
         break;
     }
     if (passthrough_from != -1) {
