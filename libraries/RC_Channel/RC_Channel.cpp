@@ -215,7 +215,7 @@ const AP_Param::GroupInfo RC_Channel::var_info[] = {
     // @Values{Copter, Rover, Plane, Blimp, Sub}:  111:Loweheiser starter
     // @Values{Copter,Plane,Rover,Blimp,Sub,Tracker}: 112:SwitchExternalAHRS
     // @Values{Copter, Rover, Plane, Sub}: 113:Retract Mount2
-    // @Values{Copter, Rover, Plane, Sub}: 114:RELAY3_4 --/+-/++
+    // @Values{Copter, Rover, Plane, Sub}: 114:Relay3_4 off/off on/off on/on
     // @Values{Plane}: 150:CRUISE Mode
     // @Values{Copter}: 151:TURTLE Mode+++
     // @Values{Copter}: 152:SIMPLE heading reset
@@ -894,6 +894,8 @@ const RC_Channel::LookupTable RC_Channel::lookuptable[] = {
 #if AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
     { AUX_FUNC::RELAY5,"Relay5"},
     { AUX_FUNC::RELAY6,"Relay6"},
+    { AUX_FUNC::RELAY3_4,"Relay3_4"},
+
 #endif
     { AUX_FUNC::SAILBOAT_MOTOR_3POS,"SailboatMotor"},
     { AUX_FUNC::SURFACE_TRACKING,"SurfaceTracking"},
@@ -1554,8 +1556,9 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
         do_aux_function_relay(1, ch_flag == AuxSwitchPos::HIGH);
         break;
     case AUX_FUNC::RELAY3:
+        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH);
+        break;
     case AUX_FUNC::RELAY4:
-        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
         do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
         break;
     case AUX_FUNC::RELAY5:
@@ -1567,6 +1570,7 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
     case AUX_FUNC::RELAY3_4:
         do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
         do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
+        GCS_SEND_TEXT(MAV_SEVERITY::MAV_SEVERITY_INFO, "Relay Control: Relay3: %s Relay4: %s", ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE ? "ON" : "OFF", ch_flag == AuxSwitchPos::HIGH ? "ON" : "OFF");
         break;
 
 #endif  // AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
