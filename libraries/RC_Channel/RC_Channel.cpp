@@ -1572,9 +1572,9 @@ bool RC_Channel::do_aux_function(const AuxFuncTrigger &trigger)
         do_aux_function_relay(5, ch_flag == AuxSwitchPos::HIGH);
         break;
     case AUX_FUNC::RELAY3_4:
-        do_aux_function_relay(2, ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE);
-        do_aux_function_relay(3, ch_flag == AuxSwitchPos::HIGH);
-        GCS_SEND_TEXT(MAV_SEVERITY::MAV_SEVERITY_INFO, "Relay Control: Relay3: %s Relay4: %s", ch_flag == AuxSwitchPos::HIGH || ch_flag == AuxSwitchPos::MIDDLE ? "ON" : "OFF", ch_flag == AuxSwitchPos::HIGH ? "ON" : "OFF");
+        do_aux_function_relay(2, ch_flag == AuxSwitchPos::LOW || ch_flag == AuxSwitchPos::MIDDLE);
+        do_aux_function_relay(3,  ch_flag == AuxSwitchPos::MIDDLE || ch_flag == AuxSwitchPos::HIGH);
+        GCS_SEND_TEXT(MAV_SEVERITY::MAV_SEVERITY_INFO, "MIV_PP: Safety(R3): %s Release(R4): %s", ch_flag == AuxSwitchPos::LOW || ch_flag == AuxSwitchPos::MIDDLE ? "ON" : "OFF", ch_flag == AuxSwitchPos::MIDDLE || ch_flag == AuxSwitchPos::HIGH ? "ON" : "OFF");
         break;
 
 #endif  // AP_SERVORELAYEVENTS_ENABLED && AP_RELAY_ENABLED
