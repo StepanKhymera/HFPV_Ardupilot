@@ -3492,7 +3492,8 @@ void GCS_MAVLINK::send_vfr_hud()
     mavlink_msg_vfr_hud_send(
         chan,
         vfr_hud_airspeed(),
-        ahrs.groundspeed(),
+ //       ahrs.groundspeed(),
+        AP::gps().ground_speed(),
         ahrs.get_yaw_deg(),
         abs(vfr_hud_throttle()),
         vfr_hud_alt(),
@@ -5978,7 +5979,7 @@ void GCS_MAVLINK::send_sys_status()
     float link_quality = rssi != nullptr ? constrain_float(rssi->read_receiver_link_quality(), 0, 100) : 0;
 #endif
 #if AP_RCPROTOCOL_ENABLED && AP_RCPROTOCOL_CRSF_ENABLED && AP_OSD_LINK_STATS_EXTENSIONS_ENABLED
-    AP_RCProtocol_CRSF* crsf = AP::crsf_active();
+    AP_RCProtocol_CRSF* crsf = AP::crsf();
     int16_t tx_power;
     int8_t snr;
     if (crsf != nullptr){
